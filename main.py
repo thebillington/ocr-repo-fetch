@@ -61,12 +61,16 @@ for i in range(1, len(cells), 4):
 for i, candidate in enumerate(candidates):
     print(f"Fetching work for Candidate: {candidate} ({i+1}/{len(candidates)})")
     
-    driver.find_element(By.LINK_TEXT, candidate).click()
+    try:
+        driver.find_element(By.LINK_TEXT, candidate).click()
 
-    driver.find_element('xpath', '//input[@value="allSelectRadioButton"]').click()
-    driver.find_element('xpath', '//input[@value="Download"]').click()
+        driver.find_element('xpath', '//input[@value="allSelectRadioButton"]').click()
+        driver.find_element('xpath', '//input[@value="Download"]').click()
 
-    driver.back()
+        driver.back()
+    except:
+        print(f"Cannot fetch work for Candidate: {candidate}")
+        driver.back()
 
 input("Press any key to continue (once downloads have all finished)...")
 
